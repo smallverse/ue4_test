@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "rust_cross_platform_lib",
+	"Description": "rust_cross_platform_lib",
+	"Category": "Other",
+	"CreatedBy": "rust_cross_platform_lib",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "rust_cross_platform_lib",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
