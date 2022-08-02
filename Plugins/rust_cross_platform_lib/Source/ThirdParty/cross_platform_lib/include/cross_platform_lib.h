@@ -112,9 +112,9 @@ namespace com {
         };
 #endif // CXXBRIDGE1_STRUCT_com$cross_platform_lib$ObjInfo
 
-        ::std::size_t add(::std::size_t left, ::std::size_t right) noexcept;
+        extern "C" ::std::size_t add(::std::size_t left, ::std::size_t right) noexcept;
 
-        ::com::cross_platform_lib::Quaternion gen_quaternion(float x, float y, float z, float w) noexcept;
+        extern "C" ::com::cross_platform_lib::Quaternion gen_quaternion(float x, float y, float z, float w) noexcept;
 
         ::com::cross_platform_lib::ObjInfo gen_obj_info(::rust::String name, float age, ::rust::String desc) noexcept;
 
