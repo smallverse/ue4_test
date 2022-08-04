@@ -5,9 +5,9 @@ using UnrealBuildTool;
 
 public class cross_platform_lib : ModuleRules
 {
-	public cross_platform_lib(ReadOnlyTargetRules Target) : base(Target)
-	{
-		Console.WriteLine("-----------------------------------ThirdParty ModuleRules: cross_platform_lib start-------------------------------------------");
+    public cross_platform_lib(ReadOnlyTargetRules Target) : base(Target)
+    {
+        Console.WriteLine("-----------------------------------ThirdParty ModuleRules: cross_platform_lib start-------------------------------------------");
         Console.WriteLine("-----------------------------------ModuleDirectory:{0}", ModuleDirectory);
         Console.WriteLine("-----------------------------------Target.Platform:{0}", Target.Platform);
 
@@ -19,6 +19,7 @@ public class cross_platform_lib : ModuleRules
 
         if (Target.Platform == UnrealTargetPlatform.Win64)
         {
+            //https://github.com/dtolnay/cxx/issues/1074
             PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "bcrypt.lib"));
             PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "UserEnv.lib"));
             // Add the import library
@@ -81,5 +82,5 @@ public class cross_platform_lib : ModuleRules
         }
 
         Console.WriteLine("-----------------------------------ThirdParty ModuleRules: cross_platform_lib end-------------------------------------------");
-	}
+    }
 }
