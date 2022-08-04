@@ -3,7 +3,7 @@
 
 #include "FloatingActor.h"
 
-#include "../../Plugins/rust_cross_platform_lib/Source/ThirdParty/cross_platform_lib/include/cross_platform_lib.h"
+#include "../../Plugins/rust_cross_platform_lib/Source/ThirdParty/cross_platform_lib/include/lib.rs.h"
 using namespace com::cross_platform_lib;
 
 // Sets default values
@@ -38,9 +38,11 @@ void AFloatingActor::Tick(float DeltaTime)
 
 	int re = add(10000, 0);
 	UE_LOG(LogTemp, Warning, TEXT("------ AFloatingActor ,%d"), re);
-	//::rust::String s = gen_obj_info_str("11", 11, "11");
-	////UE_LOG(LogTemp, Warning, TEXT("------Tick,%s"), s);
-	//UE_LOG(LogTemp, Warning, TEXT("------ AFloatingActor ,%d"), re);
+	::rust::String s = gen_obj_info_str("11", 11, "11");
+	FString fs(s.c_str());
+	UE_LOG(LogTemp, Warning, TEXT("------Tick,%s"), *fs);
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *fs);
 
 
 	FVector NewLocation = GetActorLocation();

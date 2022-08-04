@@ -5,7 +5,9 @@
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IPluginManager.h"
 
-#include "../../ThirdParty/cross_platform_lib/include/cross_platform_lib.h"
+#include "../../ThirdParty/cross_platform_lib/include/lib.rs.h"
+
+using namespace com::cross_platform_lib;
 
 #define LOCTEXT_NAMESPACE "Frust_cross_platform_libModule"
 
@@ -29,29 +31,27 @@ void Frust_cross_platform_libModule::StartupModule()
 #elif PLATFORM_LINUX
 	UE_LOG(LogTemp, Warning, TEXT("------ Frust_cross_platform_libModule::StartupModule ,%s"), ANSI_TO_TCHAR("PLATFORM_LINUX"));
 	//	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/cross_platform_lib/Linux/Release/x86_64-unknown-linux-gnu/libcross_platform_lib.so"));
-#elif PLATFORM_ANDROID
-	UE_LOG(LogTemp, Warning, TEXT("------ Frust_cross_platform_libModule::StartupModule ,%s"), ANSI_TO_TCHAR("PLATFORM_ANDROID"));
-	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/cross_platform_lib/Android/Release/armeabi-v7a/libcross_platform_lib.so"));
-#elif PLATFORM_IOS
-	UE_LOG(LogTemp, Warning, TEXT("------ Frust_cross_platform_libModule::StartupModule ,%s"), ANSI_TO_TCHAR("PLATFORM_IOS"));
-	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/cross_platform_lib/IOS/Release/aarch64-apple-ios/libcross_platform_lib.a"));
 
 #endif // PLATFORM_WINDOWS
+
+#if PLATFORM_WINDOWS || PLATFORM_MAC 
+	//PLATFORM_ANDROID PLATFORM_IOS is not support try catch
 
 	UE_LOG(LogTemp, Warning, TEXT("------rust_cross_platform_lib LibraryPath: %s"), *LibraryPath);
 	ExampleLibraryHandle = !LibraryPath.IsEmpty() ? FPlatformProcess::GetDllHandle(*LibraryPath) : nullptr;
 
 	if (ExampleLibraryHandle)
 	{
-#if PLATFORM_WINDOWS || PLATFORM_ANDROID || PLATFORM_MAC || PLATFORM_IOS
-		int re = 0;
+		int re = add(10000, 0);
 		UE_LOG(LogTemp, Warning, TEXT("------ Frust_cross_platform_libModule ,%d"), re);
-#endif
 	}
 	else
 	{
-		FMessageDialog::Open(EAppMsgType::Ok, LOCTEXT("ThirdPartyLibraryError", "Failed to load rust_cross_platform_lib third party library"));
+		UE_LOG(LogTemp, Warning, TEXT("------ Frust_cross_platform_libModule ,Failed to load rust_cross_platform_lib third party library"));
 	}
+
+#endif
+
 }
 
 void Frust_cross_platform_libModule::ShutdownModule()
@@ -65,5 +65,5 @@ void Frust_cross_platform_libModule::ShutdownModule()
 }
 
 #undef LOCTEXT_NAMESPACE
-	
+
 IMPLEMENT_MODULE(Frust_cross_platform_libModule, rust_cross_platform_lib)
