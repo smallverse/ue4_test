@@ -19,6 +19,8 @@ public class cross_platform_lib : ModuleRules
 
         if (Target.Platform == UnrealTargetPlatform.Win64)
         {
+            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "bcrypt.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "UserEnv.lib"));
             // Add the import library
             PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib.lib"));
 
