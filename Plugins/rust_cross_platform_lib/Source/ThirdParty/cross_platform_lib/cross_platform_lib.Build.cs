@@ -43,7 +43,7 @@ public class cross_platform_lib : ModuleRules
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
-            string ExampleSoPath = Path.Combine(ModuleDirectory, "Linux", "Release", "x86_64-unknown-linux-gnu", "cross_platform_lib.so");
+            string ExampleSoPath = Path.Combine(ModuleDirectory, "Linux", "Release", "x86_64-unknown-linux-gnu", "libcross_platform_lib.so");
             PublicAdditionalLibraries.Add(ExampleSoPath);
             PublicDelayLoadDLLs.Add(ExampleSoPath);
             RuntimeDependencies.Add(ExampleSoPath);
@@ -59,7 +59,7 @@ public class cross_platform_lib : ModuleRules
             string Architecture = "armeabi-v7a";
             //string Architecture = "arm64-v8a";
 
-            string soPath = Path.Combine(ModuleDirectory, "Android", "Release", Architecture, "cross_platform_lib.so");
+            string soPath = Path.Combine(ModuleDirectory, "Android", "Release", Architecture, "libcross_platform_lib.so");
             PublicAdditionalLibraries.Add(soPath);
             //PublicDelayLoadDLLs.Add(soPath);
             //RuntimeDependencies.Add(soPath);
@@ -75,7 +75,7 @@ public class cross_platform_lib : ModuleRules
             // select required architecture
             string Architecture = "aarch64-apple-ios";
 
-            string soPath = Path.Combine(ModuleDirectory, "IOS", "Release", Architecture, "cross_platform_lib.a");
+            string soPath = Path.Combine(ModuleDirectory, "IOS", "Release", Architecture, "libcross_platform_lib.a");
             PublicAdditionalLibraries.Add(soPath);
             //PublicDelayLoadDLLs.Add(soPath);
             //RuntimeDependencies.Add(soPath);
