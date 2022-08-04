@@ -31,19 +31,35 @@ void AFloatingActor::BeginPlay()
 
 }
 
+void AFloatingActor::TestLib(float DeltaTime)
+{
+	int re = add(10000, 0);
+	UE_LOG(LogTemp, Warning, TEXT("------add  ,%d"), re);
+	FString reFS = FString::FromInt(re);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *reFS);
+
+	::rust::String s = gen_obj_info_str("11", 11, "11");
+	FString fs(s.c_str());
+	UE_LOG(LogTemp, Warning, TEXT("------gen_obj_info_str,%s"), *fs);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *fs);
+
+	ObjInfo info = gen_obj_info("22", 22, "22");
+	FString fsName(info.name.c_str());
+	UE_LOG(LogTemp, Warning, TEXT("------gen_obj_info,%s"), *fsName);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *fsName);
+
+	Quaternion q = gen_quaternion(DeltaTime, 0.0, 0.0, 0.0);
+	UE_LOG(LogTemp, Warning, TEXT("------gen_quaternion,%d"), q.x);
+	FString reQX = FString::SanitizeFloat(q.x);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *reQX);
+}
+
 // Called every frame
 void AFloatingActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	int re = add(10000, 0);
-	UE_LOG(LogTemp, Warning, TEXT("------ AFloatingActor ,%d"), re);
-	::rust::String s = gen_obj_info_str("11", 11, "11");
-	FString fs(s.c_str());
-	UE_LOG(LogTemp, Warning, TEXT("------Tick,%s"), *fs);
-
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *fs);
-
+	TestLib(DeltaTime);
 
 	FVector NewLocation = GetActorLocation();
 	FRotator NewRotation = GetActorRotation();
@@ -54,3 +70,4 @@ void AFloatingActor::Tick(float DeltaTime)
 	NewRotation.Yaw += DeltaRotation;
 	SetActorLocationAndRotation(NewLocation, NewRotation);
 }
+

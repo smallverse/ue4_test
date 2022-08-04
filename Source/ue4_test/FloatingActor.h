@@ -24,6 +24,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	void TestLib(float DeltaTime);
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
