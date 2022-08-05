@@ -4,6 +4,7 @@
 #include "FloatingActor.h"
 
 #include "../../Plugins/rust_cross_platform_lib/Source/ThirdParty/cross_platform_lib/include/lib.rs.h"
+
 using namespace com::cross_platform_lib;
 
 // Sets default values
