@@ -50,7 +50,8 @@ public class cross_platform_lib : ModuleRules
         }
         else if (Target.Platform == UnrealTargetPlatform.Android)
         {
-            PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Android", "include"));
+            //PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Android", "include"));
+            PublicIncludePaths.Add(includePath);
 
             PrivateDependencyModuleNames.AddRange(new string[] { "Launch" });
             AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(ModuleDirectory, "Android", "CROSS_PLATFORM_LIB_UPL.xml")));
@@ -58,7 +59,8 @@ public class cross_platform_lib : ModuleRules
             // select required architecture
             string Architecture = "armeabi-v7a";
             //string Architecture = "arm64-v8a";
-
+            string aPath = Path.Combine(ModuleDirectory, "Android", "Release", Architecture, "libcross_platform_lib.a");
+            PublicAdditionalLibraries.Add(aPath);
             string soPath = Path.Combine(ModuleDirectory, "Android", "Release", Architecture, "libcross_platform_lib.so");
             PublicAdditionalLibraries.Add(soPath);
             //PublicDelayLoadDLLs.Add(soPath);
