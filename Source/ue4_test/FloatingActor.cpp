@@ -34,6 +34,8 @@ void AFloatingActor::BeginPlay()
 
 void AFloatingActor::TestLib(float DeltaTime)
 {
+#if PLATFORM_WINDOWS || PLATFORM_MAC 
+
 	int re = add(10000, 0);
 	UE_LOG(LogTemp, Warning, TEXT("------add  ,%d"), re);
 	FString reFS = FString::FromInt(re);
@@ -53,6 +55,11 @@ void AFloatingActor::TestLib(float DeltaTime)
 	UE_LOG(LogTemp, Warning, TEXT("------gen_quaternion,%d"), q.x);
 	FString reQX = FString::SanitizeFloat(q.x);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *reQX);
+#endif
+
+#if PLATFORM_WINDOWS || PLATFORM_MAC 
+#endif
+	
 }
 
 // Called every frame
