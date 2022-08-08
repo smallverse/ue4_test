@@ -23,27 +23,33 @@ public class cross_platform_lib : ModuleRules
             PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "bcrypt.lib"));
             PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "UserEnv.lib"));
             // Add the import library
-            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib.lib"));
+            //PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib.lib"));
+            //ffi
+            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib_ffi.lib"));
 
             // Delay-load the DLL, so we can load it from the right place first
-            PublicDelayLoadDLLs.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib.dll"));
+            //PublicDelayLoadDLLs.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib.dll"));
+            //ffi
+            PublicDelayLoadDLLs.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib_ffi.dll"));
 
             // Ensure that the DLL is staged along with the executable
             //RuntimeDependencies.Add(Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib.dll"));
             //cross_platform_lib
-            RuntimeDependencies.Add("$(BinaryOutputDir)/cross_platform_lib.dll", Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib.dll"));
+            //RuntimeDependencies.Add("$(BinaryOutputDir)/cross_platform_lib.dll", Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib.dll"));
+            //ffi
+            RuntimeDependencies.Add("$(BinaryOutputDir)/cross_platform_lib_ffi.dll", Path.Combine(ModuleDirectory, "Win64", "Release", "cross_platform_lib_ffi.dll"));
         }
         else if (Target.Platform == UnrealTargetPlatform.Mac)
         {
             //m1 上构建的dylib
-            PublicDelayLoadDLLs.Add(Path.Combine(ModuleDirectory, "Mac", "Release", "x86_64-apple-darwin", "cross_platform_lib.dylib"));
-            RuntimeDependencies.Add(Path.Combine(ModuleDirectory, "Mac", "Release", "x86_64-apple-darwin", "cross_platform_lib.dylib"));
+            PublicDelayLoadDLLs.Add(Path.Combine(ModuleDirectory, "Mac", "Release", "x86_64-apple-darwin", "cross_platform_lib_ffi.dylib"));
+            RuntimeDependencies.Add(Path.Combine(ModuleDirectory, "Mac", "Release", "x86_64-apple-darwin", "cross_platform_lib_ffi.dylib"));
             // PublicDelayLoadDLLs.Add(Path.Combine(ModuleDirectory, "Mac", "Release","x86_64-apple-darwin", "cross_platform_lib.dylib"));
             // RuntimeDependencies.Add("$(PluginDir)/Source/ThirdParty/cross_platform_lib/Mac/Release/x86_64-apple-darwin/cross_platform_lib.dylib");
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
-            string ExampleSoPath = Path.Combine(ModuleDirectory, "Linux", "Release", "x86_64-unknown-linux-gnu", "libcross_platform_lib.so");
+            string ExampleSoPath = Path.Combine(ModuleDirectory, "Linux", "Release", "x86_64-unknown-linux-gnu", "libcross_platform_lib_ffi.so");
             PublicAdditionalLibraries.Add(ExampleSoPath);
             PublicDelayLoadDLLs.Add(ExampleSoPath);
             RuntimeDependencies.Add(ExampleSoPath);
@@ -59,9 +65,8 @@ public class cross_platform_lib : ModuleRules
             // select required architecture
             string Architecture = "armeabi-v7a";
             //string Architecture = "arm64-v8a";
-            string aPath = Path.Combine(ModuleDirectory, "Android", "Release", Architecture, "libcross_platform_lib.a");
-            PublicAdditionalLibraries.Add(aPath);
-            string soPath = Path.Combine(ModuleDirectory, "Android", "Release", Architecture, "libcross_platform_lib.so");
+          
+            string soPath = Path.Combine(ModuleDirectory, "Android", "Release", Architecture, "libcross_platform_lib_ffi.so");
             PublicAdditionalLibraries.Add(soPath);
             //PublicDelayLoadDLLs.Add(soPath);
             //RuntimeDependencies.Add(soPath);
@@ -77,7 +82,7 @@ public class cross_platform_lib : ModuleRules
             // select required architecture
             string Architecture = "aarch64-apple-ios";
 
-            string soPath = Path.Combine(ModuleDirectory, "IOS", "Release", Architecture, "libcross_platform_lib.a");
+            string soPath = Path.Combine(ModuleDirectory, "IOS", "Release", Architecture, "libcross_platform_lib_ffi.a");
             PublicAdditionalLibraries.Add(soPath);
             //PublicDelayLoadDLLs.Add(soPath);
             //RuntimeDependencies.Add(soPath);

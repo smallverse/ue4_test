@@ -22,8 +22,8 @@
   <resourceCopies>
     <log text="------ koiverse_lib_base_cxx PluginDir: $S(PluginDir)"/>
 
-    <copyFile src="$S(PluginDir)/Release/$S(Architecture)/cross_platform_lib.so"
-              dst="$S(BuildDir)/libs/$S(Architecture)/cross_platform_lib.so" />
+    <copyFile src="$S(PluginDir)/Release/$S(Architecture)/libcross_platform_lib_ffi.so"
+              dst="$S(BuildDir)/libs/$S(Architecture)/libcross_platform_lib_ffi.so" />
 
 
 
