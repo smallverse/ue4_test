@@ -3,9 +3,10 @@
 
 #include "FloatingActor.h"
 
-#include "../../Plugins/rust_cross_platform_lib/Source/ThirdParty/cross_platform_lib/include/lib.rs.h"
+//#include "../../Plugins/rust_cross_platform_lib/Source/ThirdParty/cross_platform_lib/include/lib.rs.h"
+#include "../../Plugins/rust_cross_platform_lib/Source/ThirdParty/cross_platform_lib/include/bindings.h"
 
-using namespace com::cross_platform_lib;
+
 
 // Sets default values
 AFloatingActor::AFloatingActor()
@@ -36,30 +37,52 @@ void AFloatingActor::TestLib(float DeltaTime)
 {
 #if PLATFORM_WINDOWS || PLATFORM_MAC 
 
-	int re = add(10000, 0);
+	/*int re = com::cross_platform_lib::add(10000, 0);
 	UE_LOG(LogTemp, Warning, TEXT("------add  ,%d"), re);
 	FString reFS = FString::FromInt(re);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *reFS);
 
-	::rust::String s = gen_obj_info_str("11", 11, "11");
+	::rust::String s = com::cross_platform_lib::gen_obj_info_str("11", 11, "11");
 	FString fs(s.c_str());
 	UE_LOG(LogTemp, Warning, TEXT("------gen_obj_info_str,%s"), *fs);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *fs);
 
-	ObjInfo info = gen_obj_info("22", 22, "22");
+	com::cross_platform_lib::ObjInfo info = com::cross_platform_lib::gen_obj_info("22", 22, "22");
 	FString fsName(info.name.c_str());
 	UE_LOG(LogTemp, Warning, TEXT("------gen_obj_info,%s"), *fsName);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *fsName);
 
-	Quaternion q = gen_quaternion(DeltaTime, 0.0, 0.0, 0.0);
+	com::cross_platform_lib::Quaternion q = com::cross_platform_lib::gen_quaternion(DeltaTime, 0.0, 0.0, 0.0);
 	UE_LOG(LogTemp, Warning, TEXT("------gen_quaternion,%d"), q.x);
 	FString reQX = FString::SanitizeFloat(q.x);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *reQX);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *reQX);*/
 #endif
 
-#if PLATFORM_WINDOWS || PLATFORM_MAC 
+#if PLATFORM_WINDOWS || PLATFORM_MAC ||PLATFORM_ANDROID || PLATFORM_IOS
+	int c_re = add(1, 1);
+	UE_LOG(LogTemp, Warning, TEXT("------c add  ,%d"), c_re);
+	FString creFS = FString::FromInt(c_re);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *creFS);
+
+	char* objs = gen_obj_info_str("22", 22, "22");
+	FString cfs(objs);
+	UE_LOG(LogTemp, Warning, TEXT("------c gen_obj_info_str,%s"), *cfs);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *cfs);
+	gen_obj_info_str_free(objs);
+
+	PubObjInfo* pub_info = gen_obj_info("22", 22, "22");
+	FString cfsName(pub_info->name);
+	UE_LOG(LogTemp, Warning, TEXT("------c gen_obj_info,%s"), *cfsName);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *cfsName);
+	gen_obj_info_free(pub_info);
+
+	PubQuaternion cq = gen_quaternion(DeltaTime, 0.0, 0.0, 0.0);
+	UE_LOG(LogTemp, Warning, TEXT("------c gen_quaternion,%d"), cq.x);
+	FString creQX = FString::SanitizeFloat(cq.x);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *creQX);
+
 #endif
-	
+
 }
 
 // Called every frame

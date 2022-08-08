@@ -5,9 +5,11 @@
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IPluginManager.h"
 
-#include "../../ThirdParty/cross_platform_lib/include/lib.rs.h"
+//#include "../../ThirdParty/cross_platform_lib/include/lib.rs.h"
 
-using namespace com::cross_platform_lib;
+//using namespace com::cross_platform_lib;
+
+#include "../../ThirdParty/cross_platform_lib/include/bindings.h"
 
 #define LOCTEXT_NAMESPACE "Frust_cross_platform_libModule"
 
@@ -22,7 +24,8 @@ void Frust_cross_platform_libModule::StartupModule()
 	FString LibraryPath;
 #if PLATFORM_WINDOWS
 	UE_LOG(LogTemp, Warning, TEXT("------ Frust_cross_platform_libModule::StartupModule ,%s"), ANSI_TO_TCHAR("PLATFORM_WINDOWS"));
-	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/cross_platform_lib/Win64/Release/cross_platform_lib.dll"));
+	/*LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/cross_platform_lib/Win64/Release/cross_platform_lib.dll"));*/
+	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/cross_platform_lib/Win64/Release/cross_platform_lib_ffi.dll"));
 #elif PLATFORM_MAC
 	// PLATFORM_MAC_X86 PLATFORM_MAC_ARM64
 	UE_LOG(LogTemp, Warning, TEXT("------ Frust_cross_platform_libModule::StartupModule ,%s"), ANSI_TO_TCHAR("PLATFORM_MAC"));
